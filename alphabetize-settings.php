@@ -25,7 +25,14 @@ define( 'ALPHABETIZE_SETTINGS_FILE', __FILE__ );
  */
 function alphabetize_submenu_items() {
 	// Get the sub-menu items for options general.
+	if ( ! isset( $GLOBALS['submenu']['options-general.php'] ) ) {
+		return;
+	}
 	$submenu_items = $GLOBALS['submenu'][ 'options-general.php' ]; // phpcs:ignore
+
+	if ( null === $submenu_items ) {
+		return;
+	}
 
 	// Sort the sub-menu items alphabetically.
 	usort(
