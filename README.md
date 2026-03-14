@@ -19,7 +19,6 @@ In Multisite, the following are sorted:
 ## Installation
 
 [Download Sortacular v1.0.0](https://github.com/DLXPlugins/sortacular/releases/tag/1.0.0)
-))
 
 1. Download Sortacular from the above release. You'll find an attached ZIP that you can download.
 2. Upload the `sortacular` folder to the `/wp-content/plugins/` directory.
