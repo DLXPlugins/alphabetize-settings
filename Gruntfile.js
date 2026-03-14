@@ -7,7 +7,7 @@ module.exports = function( grunt ) {
 				},
 				files: [
 					{ src: [ 'sortacular.php' ], dest: '/', filter: 'isFile' },
-					{ src: [ 'readme.md' ], dest: '/', filter: 'isFile' },
+					{ src: [ 'readme.txt' ], dest: '/', filter: 'isFile' },
 				],
 			},
 		},

@@ -1,13 +1,13 @@
 === Sortacular - Sort Select Admin Settings ===
 
 Contributors: ronalfy
-Tags: admin, menu, settings, appearance, tools, dashboard, sort, organize
+Tags: admin, menu, settings, sort, organize
 Requires at least: 6.9
 Tested up to: 7.0
 Stable tag: 1.0.0
 Requires PHP: 7.2
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Keep WordPress Core menu items at the top and sort the rest alphabetically in Settings, Appearance, Tools, and Dashboard.
 
