@@ -1,17 +1,64 @@
-# Alphabetize Settings
+# Sortacular
 
-Alphabetize Settings is a WordPress plugin that sorts the sub-menu items for the "Settings" admin menu item alphabetically.
-![dlxplugins-1683785040922-1x](https://github.com/DLXPlugins/alphabetize-settings/assets/636521/02bbbee9-2474-45b5-b11d-f2ca193da573)
+Alphabetize non-core menu items in the following admin menus:
+
+1. Dashboard (index.php)
+2. Appearance
+3. Tools
+4. Settings
+
+In Multisite, the following are sorted:
+
+1. Dashboard
+2. Themes
+3. Settings
 
 
 ## Installation
 
-1. Upload the `alphabetize-settings` folder to the `/wp-content/plugins/` directory.
+1. Upload the `sortacular` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 ## Usage
 
-Once activated, the plugin will automatically sort the sub-menu items for the "Settings" admin menu item alphabetically.
+Once activated, the plugin will automatically sort the sub-menu items for the "Settings" admin menu item alphabetically. Nothing else is needed.
+
+## Filters
+
+You can customize which submenu items are treated as "Core" (kept at the top in default order) by filtering the slug arrays. Useful when WordPress adds new Core pages before the plugin is updated, or to treat a custom item as Core.
+
+Each filter receives an array of menu slugs (the `[2]` value from each submenu item). Add or remove slugs to change what stays in the Core group. Return the modified array.
+
+| Filter | Menu | Default slugs (examples) |
+|--------|------|--------------------------|
+| `sortacular_core_settings_slugs` | Settings | `options-general.php`, `options-writing.php`, `options-reading.php`, etc. |
+| `sortacular_core_multisite_settings_slugs` | Multisite → Settings | `settings.php`, `edit.php`, etc. |
+| `sortacular_core_appearance_slugs` | Appearance | `themes.php`, `site-editor.php`, `font-library.php`, `nav-menus.php`, `theme-editor.php` |
+| `sortacular_core_tools_slugs` | Tools | `tools.php`, `import.php`, `export.php`, `site-health.php`, `theme-editor.php`, `plugin-editor.php`, etc. |
+| `sortacular_core_dashboard_slugs` | Dashboard | `index.php`, `update-core.php` |
+
+**Example: add a new Core Settings page**
+
+When WordPress adds a new Settings screen (e.g. `options-newfeature.php`), you can treat it as Core until the plugin is updated:
+
+```php
+add_filter( 'sortacular_core_settings_slugs', function( $slugs ) {
+    $slugs[] = 'options-newfeature.php';
+    return $slugs;
+} );
+```
+
+**Example: remove an item from Core**
+
+To allow a Core item to be sorted with the rest (e.g. move "Privacy" into the alphabetical section):
+
+```php
+add_filter( 'sortacular_core_settings_slugs', function( $slugs ) {
+    return array_diff( $slugs, array( 'options-privacy.php' ) );
+} );
+```
+
+
 
 ## Changelog
 
@@ -20,4 +67,4 @@ Once activated, the plugin will automatically sort the sub-menu items for the "S
 
 ## License
 
-Alphabetize Settings is licensed under the GPL v2 or later.
+Sortacular is licensed under the GPL v3 or later.
