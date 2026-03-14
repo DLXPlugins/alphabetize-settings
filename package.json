@@ -1,0 +1,22 @@
+{
+  "name": "sortacular",
+  "version": "1.0.0",
+  "description": "Sorts the Dashboard, Appearance, Tools, and Settings menu alphabetically, while skipping Core items.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DLXPlugins/sortacular.git"
+  },
+  "author": "Ronald Huereca",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/DLXPlugins/sortacular/issues"
+  },
+  "homepage": "https://github.com/DLXPlugins/sortacular#readme",
+  "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-cli": "^1.5.0",
+    "grunt-contrib-compress": "^2.0.0"
+  }
+}

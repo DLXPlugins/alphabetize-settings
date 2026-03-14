@@ -35,6 +35,8 @@ wp-config.php
 # htaccess
 /.htaccess
 
+/node_modules
+
 # All plugins
 #
 # Note: If you wish to whitelist plugins,
@@ -46,3 +48,4 @@ wp-config.php
 # Note: If you wish to whitelist themes,
 # uncomment the next line
 #/wp-content/themes
+node_modules/.bin/esparse

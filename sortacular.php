@@ -47,6 +47,81 @@ function get_core_settings_slugs() {
 }
 
 /**
+ * Default WordPress Core Appearance submenu slugs (themes.php children).
+ *
+ * Kept in sync with known Core; filter sortacular_core_appearance_slugs for new Core pages.
+ * Includes theme-editor.php so Theme File Editor (added last by Core) stays in Core group.
+ * Customize, Header, and Background use full URLs; sort_appearance_menu_items() treats any
+ * slug containing 'customize.php' as Core.
+ *
+ * @return string[]
+ */
+function get_core_appearance_slugs() {
+	$slugs = array(
+		'themes.php',
+		'site-editor.php',
+		'font-library.php',
+		'nav-menus.php',
+		'theme-editor.php',
+	);
+	/**
+	 * Filter the Core Appearance (themes.php children) slugs.
+	 *
+	 * @param string[] $slugs The Core Appearance submenu slugs.
+	 */
+	return apply_filters( 'sortacular_core_appearance_slugs', $slugs );
+}
+
+/**
+ * Default WordPress Core Tools submenu slugs (tools.php children).
+ *
+ * Kept in sync with known Core; filter sortacular_core_tools_slugs for new Core pages.
+ * Includes theme-editor.php and plugin-editor.php so editors (added last by Core for block themes) stay in Core group.
+ *
+ * @return string[]
+ */
+function get_core_tools_slugs() {
+	$slugs = array(
+		'tools.php',
+		'import.php',
+		'export.php',
+		'site-health.php',
+		'export-personal-data.php',
+		'erase-personal-data.php',
+		'ms-delete-site.php',
+		'network.php',
+		'theme-editor.php',
+		'plugin-editor.php',
+	);
+	/**
+	 * Filter the Core Tools (tools.php children) slugs.
+	 *
+	 * @param string[] $slugs The Core Tools submenu slugs.
+	 */
+	return apply_filters( 'sortacular_core_tools_slugs', $slugs );
+}
+
+/**
+ * Default WordPress Core Dashboard submenu slugs (index.php children).
+ *
+ * Kept in sync with known Core; filter sortacular_core_dashboard_slugs for new Core pages.
+ *
+ * @return string[]
+ */
+function get_core_dashboard_slugs() {
+	$slugs = array(
+		'index.php',
+		'update-core.php',
+	);
+	/**
+	 * Filter the Core Dashboard (index.php children) slugs.
+	 *
+	 * @param string[] $slugs The Core Dashboard submenu slugs.
+	 */
+	return apply_filters( 'sortacular_core_dashboard_slugs', $slugs );
+}
+
+/**
  * Returns the single submenu entry used as the visual separator.
  *
  * @return array{0: string, 1: string, 2: string, 3: string}
@@ -61,32 +136,30 @@ function get_separator_submenu_entry() {
 }
 
 /**
- * Sorts the Settings submenu: Core first (original order), separator, then rest A–Z.
+ * Sorts a submenu by Core slugs first (original order), optional separator, then rest A–Z.
+ *
+ * Only adds the separator when both core and non-core items exist.
+ *
+ * @param string   $parent_slug Parent menu slug (e.g. 'options-general.php', 'themes.php').
+ * @param string[] $core_slugs  Slugs to treat as Core; order preserved. Filter before passing if needed.
  */
-function sort_options_menu_items() {
-	if ( ! isset( $GLOBALS['submenu']['options-general.php'] ) ) {
+function sort_submenu_by_core_then_alpha( $parent_slug, array $core_slugs ) {
+	if ( ! isset( $GLOBALS['submenu'][ $parent_slug ] ) ) {
 		return;
 	}
-	$submenu_items = $GLOBALS['submenu']['options-general.php']; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	$submenu_items = $GLOBALS['submenu'][ $parent_slug ]; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
 
 	if ( ! is_array( $submenu_items ) ) {
 		return;
 	}
 
-	/**
-	 * Filter the Core settings (options-general.php children) slugs.
-	 *
-	 * @param string[] $core_slugs The Core settings (options-general.php children) slugs.
-	 */
-	$core_slugs = apply_filters( 'sortacular_core_settings_slugs', get_core_settings_slugs() );
-	$core_slugs = array_flip( $core_slugs );
-
+	$core_lookup = array_flip( $core_slugs );
 	$core_items  = array();
 	$other_items = array();
 
 	foreach ( $submenu_items as $item ) {
 		$slug = isset( $item[2] ) ? $item[2] : '';
-		if ( isset( $core_slugs[ $slug ] ) ) {
+		if ( isset( $core_lookup[ $slug ] ) ) {
 			$core_items[] = $item;
 		} else {
 			$other_items[] = $item;
@@ -106,7 +179,47 @@ function sort_options_menu_items() {
 		? array_merge( $core_items, array( $separator_entry ), $other_items )
 		: array_merge( $core_items, $other_items );
 
-	$GLOBALS['submenu']['options-general.php'] = $final; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	$GLOBALS['submenu'][ $parent_slug ] = $final; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+}
+
+/**
+ * Sorts the Settings submenu: Core first (original order), separator, then rest A–Z.
+ */
+function sort_options_menu_items() {
+	sort_submenu_by_core_then_alpha( 'options-general.php', get_core_settings_slugs() );
+}
+
+/**
+ * Sorts the Appearance submenu: Core first (original order), separator, then rest A–Z.
+ *
+ * Treats Customize, Header, and Background as Core by including any submenu slug
+ * that contains 'customize.php' (Core uses full URLs for those items).
+ */
+function sort_appearance_menu_items() {
+	$core_slugs = get_core_appearance_slugs();
+	if ( isset( $GLOBALS['submenu']['themes.php'] ) && is_array( $GLOBALS['submenu']['themes.php'] ) ) {
+		foreach ( $GLOBALS['submenu']['themes.php'] as $item ) {
+			$slug = isset( $item[2] ) ? $item[2] : '';
+			if ( '' !== $slug && str_contains( $slug, 'customize.php' ) && ! in_array( $slug, $core_slugs, true ) ) {
+				$core_slugs[] = $slug;
+			}
+		}
+	}
+	sort_submenu_by_core_then_alpha( 'themes.php', $core_slugs );
+}
+
+/**
+ * Sorts the Tools submenu: Core first (original order), separator, then rest A–Z.
+ */
+function sort_tools_menu_items() {
+	sort_submenu_by_core_then_alpha( 'tools.php', get_core_tools_slugs() );
+}
+
+/**
+ * Sorts the Dashboard submenu: Core first (original order), separator, then rest A–Z.
+ */
+function sort_dashboard_menu_items() {
+	sort_submenu_by_core_then_alpha( 'index.php', get_core_dashboard_slugs() );
 }
 
 /**
@@ -137,4 +250,7 @@ function print_separator_styles() {
 
 // Run after menus are built; use action not filter.
 add_action( 'admin_init', __NAMESPACE__ . '\sort_options_menu_items' );
+add_action( 'admin_init', __NAMESPACE__ . '\sort_appearance_menu_items' );
+add_action( 'admin_init', __NAMESPACE__ . '\sort_tools_menu_items' );
+add_action( 'admin_init', __NAMESPACE__ . '\sort_dashboard_menu_items' );
 add_action( 'admin_print_styles', __NAMESPACE__ . '\print_separator_styles' );
