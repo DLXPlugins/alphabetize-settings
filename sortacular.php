@@ -47,6 +47,25 @@ function get_core_settings_slugs() {
 }
 
 /**
+ * Default WordPress Core Multisite Settings submenu slugs (options-general.php children).
+ *
+ * Kept in sync with known Core; filter sortacular_core_multisite_settings_slugs for new Core pages.
+ *
+ * @return string[]
+ */
+function get_core_multisite_settings_slugs() {
+	$settings_slugs = array(
+		'settings.php',
+	);
+	/**
+	 * Filter the Core multisite settings (settings.php children) slugs.
+	 *
+	 * @param string[] $settings_slugs The Core multisite settings (settings.php children) slugs.
+	 */
+	return apply_filters( 'sortacular_core_multisite_settings_slugs', $settings_slugs );
+}
+
+/**
  * Default WordPress Core Appearance submenu slugs (themes.php children).
  *
  * Kept in sync with known Core; filter sortacular_core_appearance_slugs for new Core pages.
@@ -63,6 +82,8 @@ function get_core_appearance_slugs() {
 		'font-library.php',
 		'nav-menus.php',
 		'theme-editor.php',
+		'widgets.php',
+		'theme-install.php',
 	);
 	/**
 	 * Filter the Core Appearance (themes.php children) slugs.
@@ -112,6 +133,7 @@ function get_core_dashboard_slugs() {
 	$slugs = array(
 		'index.php',
 		'update-core.php',
+		'upgrade.php',
 	);
 	/**
 	 * Filter the Core Dashboard (index.php children) slugs.
@@ -223,6 +245,15 @@ function sort_dashboard_menu_items() {
 }
 
 /**
+ * Sorts the Network settings submenu: Core first (original order), separator, then rest A–Z.
+ */
+function sort_network_settings_menu_items() {
+	if ( is_network_admin() ) {
+		sort_submenu_by_core_then_alpha( 'settings.php', get_core_multisite_settings_slugs() );
+	}
+}
+
+/**
  * Outputs inline CSS so the separator submenu item renders as a divider.
  */
 function print_separator_styles() {
@@ -232,7 +263,7 @@ function print_separator_styles() {
 		body #adminmenu ul.wp-submenu > li > a[href*="<?php echo esc_attr( $slug ); ?>"] {
 			pointer-events: none;
 			cursor: default;
-			border-top: 1px solid #3c434a;
+			border-top: 1px solid rgb(106, 116, 126);
 			padding-top: 0;
 			margin-top: 6px;
 			height: 0;
@@ -253,4 +284,5 @@ add_action( 'admin_init', __NAMESPACE__ . '\sort_options_menu_items' );
 add_action( 'admin_init', __NAMESPACE__ . '\sort_appearance_menu_items' );
 add_action( 'admin_init', __NAMESPACE__ . '\sort_tools_menu_items' );
 add_action( 'admin_init', __NAMESPACE__ . '\sort_dashboard_menu_items' );
+add_action( 'admin_init', __NAMESPACE__ . '\sort_network_settings_menu_items' );
 add_action( 'admin_print_styles', __NAMESPACE__ . '\print_separator_styles' );
