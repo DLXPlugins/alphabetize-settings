@@ -34,10 +34,10 @@ Each filter receives an array of menu slugs (the `[2]` value from each submenu i
 | Filter | Menu | Default slugs (examples) |
 |--------|------|--------------------------|
 | `sortacular_core_settings_slugs` | Settings | `options-general.php`, `options-writing.php`, `options-reading.php`, etc. |
-| `sortacular_core_multisite_settings_slugs` | Multisite → Settings | `settings.php`, `edit.php`, etc. |
-| `sortacular_core_appearance_slugs` | Appearance | `themes.php`, `site-editor.php`, `font-library.php`, `nav-menus.php`, `theme-editor.php` |
+| `sortacular_core_multisite_settings_slugs` | Multisite → Settings | `settings.php`, etc. |
+| `sortacular_core_appearance_slugs` | Appearance | `themes.php`, `site-editor.php`, `font-library.php`, `nav-menus.php`, `theme-editor.php`, etc. |
 | `sortacular_core_tools_slugs` | Tools | `tools.php`, `import.php`, `export.php`, `site-health.php`, `theme-editor.php`, `plugin-editor.php`, etc. |
-| `sortacular_core_dashboard_slugs` | Dashboard | `index.php`, `update-core.php` |
+| `sortacular_core_dashboard_slugs` | Dashboard (single and Multisite)| `index.php`, `update-core.php` |
 
 **Example: add a new Core Settings page**
 
