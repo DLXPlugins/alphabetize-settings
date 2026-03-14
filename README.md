@@ -1,6 +1,9 @@
 # Sortacular
 
-![Static Badge](https://img.shields.io/badge/WordPress.org-Pending-yellow) [![Static Badge](https://img.shields.io/badge/Release-1.0.0-Green)](https://github.com/DLXPlugins/sortacular/releases/download/1.0.0/sortacular.zip)
+[![Static Badge](https://img.shields.io/badge/WordPress.org-Pending-yellow)](https://github.com/DLXPlugins/sortacular/releases/tag/1.0.0) [![Static Badge](https://img.shields.io/badge/Release%20ZIP%20File-1.0.0-Green)](https://github.com/DLXPlugins/sortacular/releases/download/1.0.0/sortacular.zip)
+
+
+
 
 Alphabetize non-core menu items in the following admin menus:
 
