@@ -18,8 +18,13 @@ In Multisite, the following are sorted:
 
 ## Installation
 
-1. Upload the `sortacular` folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
+![Download Sortacular]([.images/dlx-sort-settings.jpg](https://github.com/DLXPlugins/sortacular/releases/tag/1.0.0
+))
+
+1. Download Sortacular from the above release. You'll find an attached ZIP that you can download.
+2. Upload the `sortacular` folder to the `/wp-content/plugins/` directory.
+3. Activate the plugin through the 'Plugins' menu in WordPress.
+4. Navigate in the admin to the Settings or Tools section and observe any automatic sorts.
 
 ## Usage
 
