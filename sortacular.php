@@ -17,6 +17,10 @@
 
 namespace DLXPlugins\Sortacular;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 define( 'SORTACULAR_VERSION', '1.0.0' );
 define( 'SORTACULAR_FILE', __FILE__ );
 
