@@ -1,6 +1,6 @@
 # Sortacular
 
-![DLX sort settings](.images/dlx-sort-settings.jpg)
+![Static Badge](https://img.shields.io/badge/WordPress.org-Pending-yellow) [![Static Badge](https://img.shields.io/badge/Release-1.0.0-Green)](https://github.com/DLXPlugins/sortacular/releases/download/1.0.0/sortacular.zip)
 
 Alphabetize non-core menu items in the following admin menus:
 
@@ -14,6 +14,8 @@ In Multisite, the following are sorted:
 1. Dashboard
 2. Themes
 3. Settings
+
+![DLX sort settings](.images/dlx-sort-settings.jpg)
 
 
 ## Installation
