@@ -1,7 +1,5 @@
 # Sortacular
 
-
-
 Alphabetize non-core menu items in the following admin menus:
 
 1. Dashboard (index.php)
