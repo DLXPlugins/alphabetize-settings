@@ -1,5 +1,7 @@
 # Sortacular
 
+![DLX sort settings](.images/dlx-sort-settings.jpg)
+
 Alphabetize non-core menu items in the following admin menus:
 
 1. Dashboard (index.php)
