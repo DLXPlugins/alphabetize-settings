@@ -5,7 +5,7 @@
  * Plugin URI: https://dlxplugins.com/plugins/sortacular/
  * Description: Sort the admin menu and submenu items alphabetically (but skip Core).
  * Author: DLX Plugins
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 6.9
  * Requires PHP: 8.0
  * Author URI: https://dlxplugins.com
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SORTACULAR_VERSION', '1.0.1' );
+define( 'SORTACULAR_VERSION', '1.0.2' );
 define( 'SORTACULAR_FILE', __FILE__ );
 
 /**
