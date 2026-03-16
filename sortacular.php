@@ -352,7 +352,7 @@ function sort_top_level_menu_items() {
 	if ( ! isset( $GLOBALS['menu'] ) || ! is_array( $GLOBALS['menu'] ) ) {
 		return;
 	}
-	$can_sort_top_level = true;
+	$can_sort_top_level = false;
 	/**
 	 * Filter whether to sort the top-level menu items.
 	 *
