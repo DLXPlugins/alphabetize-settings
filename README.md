@@ -3,7 +3,7 @@
 [![Static Badge](https://img.shields.io/badge/WordPress.org-Pending-yellow)](https://github.com/DLXPlugins/sortacular/releases/tag/1.0.1) [![Static Badge](https://img.shields.io/badge/Release%20ZIP%20File-1.0.1-Green)](https://github.com/DLXPlugins/sortacular/releases/download/1.0.1/sortacular.zip)
 
 
-
+Alphabetize all non-core top-level menu items.
 
 Alphabetize non-core menu items in the following admin menus:
 
@@ -23,7 +23,7 @@ In Multisite, the following are sorted:
 
 ## Installation
 
-[Download Sortacular v1.0.0](https://github.com/DLXPlugins/sortacular/releases/tag/1.0.1)
+[Download Sortacular v1.0.1](https://github.com/DLXPlugins/sortacular/releases/tag/1.0.1)
 
 1. Download Sortacular from the above release. You'll find an attached ZIP that you can download.
 2. Upload the `sortacular` folder to the `/wp-content/plugins/` directory.
@@ -68,13 +68,6 @@ add_filter( 'sortacular_core_settings_slugs', function( $slugs ) {
     return array_diff( $slugs, array( 'options-privacy.php' ) );
 } );
 ```
-
-
-
-## Changelog
-
-### 1.0.0
-* Initial release
 
 ## License
 
