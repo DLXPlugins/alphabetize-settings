@@ -4,7 +4,7 @@ Contributors: ronalfy
 Tags: admin, menu, settings, sort, organize
 Requires at least: 6.9
 Tested up to: 7.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,10 @@ No configuration needed. Activate the plugin and the menus are reorganized autom
 The Settings, Appearance, Tools, and Dashboard menus will update immediately.
 
 == Changelog ==
+
+= 1.0.1 =
+* Released 2026-03-16
+* Sort top-level menu items too. Core menus remain untouched. The rest are sorted alphabetically.
 
 = 1.0.0 =
 * Released on 2026-03-14
